@@ -31,8 +31,6 @@ class GraphStateSimulator(Simulator):
         [22, 23, 20, 21, 13, 12, 15, 14, 6, 7, 4, 5, 11, 10, 9, 8, 1, 0, 3, 2, 19, 18, 17, 16], 
         [23, 22, 21, 20, 15, 14, 13, 12, 5, 4, 7, 6, 10, 11, 8, 9, 2, 3, 0, 1, 17, 16, 19, 18]], dtype=int)
 
-    # DECOMPOSITION_TABLE = ["XXXX", "XX", "ZZXX", "ZZ", "ZXX", "Z", "ZZZ", "XXZ", "XZX", "XZXXX", "XZZZX", "XXXZX", "XZZ", "ZZX", "XXX", "X", "ZZZX", "XXZX", "ZX", "ZXXX", "XXXZ", "XZZZ", "XZ", "XZXX"]
-
     DECOMPOSITION_LOOKUP_TABLE = [
         [0, 0, 0, 0], [0, 0], [1, 1, 0, 0], [1, 1], [1, 0, 0], [1], [1, 1, 1], [0, 0, 1], [0, 1, 0], 
         [0, 1, 0, 0, 0], [0, 1, 1, 1, 0], [0, 0, 0, 1, 0], [0, 1, 1], [1, 1, 0], [0, 0, 0], [0], 
