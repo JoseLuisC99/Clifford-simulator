@@ -1,5 +1,6 @@
 from .error import *
 from enum import Enum
+from typing import Union
 
 class Bit:
     def __init__(self) -> None:
@@ -45,7 +46,7 @@ class Register:
     def __len__(self) -> int:
         return self.size
     
-    def __getitem__(self, idx) -> Bit | Qubit:
+    def __getitem__(self, idx) -> Union[Bit, Qubit]:
         return self.register[idx]
     
     def __iter__(self) -> object:

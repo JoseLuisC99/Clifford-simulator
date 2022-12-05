@@ -1,4 +1,4 @@
-from typing import Tuple, List
+from typing import Tuple, List, Union
 from more_itertools import peekable
 
 from .token import Token
@@ -24,7 +24,7 @@ class Parser:
         except StopIteration:
             raise MalformedExpressionError(msg)
     
-    def safe_peek(self) -> Token | None:
+    def safe_peek(self) -> Union[Token,  None]:
         try:
             return self.tokens.peek()
         except StopIteration:

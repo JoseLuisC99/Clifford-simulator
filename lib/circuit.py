@@ -1,6 +1,7 @@
 import sys
 from enum import Enum
 from itertools import product
+from typing import Union
 from .register import QuantumRegister, ClassicalRegister, Register as CircRegister, RegisterType
 from .error import *
 
@@ -10,7 +11,7 @@ from qasm.instruction import *
 CircuitOp = Enum('CircuitOp', ['APPLY', 'MEASURE', 'IF', 'GATE'])
 
 class QuantumCircuit:
-    def __init__(self, qreg: QuantumRegister | List[QuantumRegister], creg: ClassicalRegister | List[ClassicalRegister]) -> None:
+    def __init__(self, qreg: Union[QuantumRegister, List[QuantumRegister]], creg: Union[ClassicalRegister, List[ClassicalRegister]]) -> None:
         if isinstance(qreg, QuantumRegister):
             qreg = [qreg]
         if isinstance(creg, ClassicalRegister):
@@ -99,6 +100,16 @@ class QuantumCircuit:
     
     def Swap(self, control: int, target: int) -> None:
         self._apply('swap', control, target)
+    
+    def measure(self) -> None:
+        for qname, cname in zip(self._qreg, self._creg):
+            qidx = self._resolve_reg(self._get_qreg(qname), -1)
+            cidx = self._resolve_reg(self._get_creg(cname), -1)
+            
+            if len(qidx) != len(cidx):
+                raise MeasureError('invalid register for measure operation')
+            for a, b in zip(qidx, cidx):
+                self._apply_measurement(a, b)
     
     @staticmethod
     def from_qasm(qasm: QasmProgram):
